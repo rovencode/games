@@ -1,4 +1,5 @@
 # Copyright Roven Shah
+# (C) Roven Shah 2023
 
 import time
 EggNum = 0
