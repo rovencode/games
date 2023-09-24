@@ -1,3 +1,5 @@
+# Copyright Roven Shah
+
 import time
 EggNum = 0
 SugarNum = 0
