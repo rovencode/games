@@ -33,7 +33,6 @@ time.sleep(1)
 print("to buy something, you type: get {your item)")
 time.sleep(1)
 print("what would you like to buy")
-
 continue_game = True
 while continue_game:
     shop_selection = str(input(""))
@@ -68,44 +67,42 @@ while continue_game:
     if Shopping_loop_trigger == "yes":
         print("type how many more rounds you want to shop")
         Shopping_loop_int = input("")
-        valid_shopping_loop_values = ["a","b","c","d","e","f","g","h","i",]
-        if Shopping_loop_int == "a" or "b" or "c" or "d" or "e" or "f" or "g" or "h" or "i" or "j" or "k" or "l" or "m" or "n" or "o" or "p" or "q" or "r" or "s" or "t" or "u" or "v" or "w" or "x" or "y" or "z": 
-            while Shopping_loop_int != "a" or "b" or "c" or "d" or "e" or "f" or "g" or "h" or "i" or "j" or "k" or "l" or "m" or "n" or "o" or "p" or "q" or "r" or "s" or "t" or "u" or "v" or "w" or "x" or "y" or "z":
-                print("this is not an intger")
-                time.sleep(1)
-                print("try again")
-                Shopping_loop_int = input("")
+        while not Shopping_loop_int.isdigit():
+            print("this is not an intger")
+            time.sleep(1)
+            print("try again")
+            Shopping_loop_int = input("")
+            print("ok, have fun shopping")
         for i in range(int(Shopping_loop_int)):
             shop_selection = str(input(""))
-            while shop_selection != "get egg" or "get sugar" or "get baking soda" or "get toppings":
-                if shop_selection == "get egg":
-                    EggNum += 1
-                    Money -= 12
-                    print(f"you have ${Money}")
-                    print(f"you have {EggNum} eggs")
-                elif shop_selection == "get sugar":
-                    SugarNum += 1
-                    Money -= 12
-                    print(f"you have ${Money}")
-                    print(f"you have {SugarNum} sugar")
-                elif shop_selection == "get baking soda":
-                    BakingSodaNum += 1
-                    Money -= 12
-                    print(f"you have ${Money}")
-                    print(f"you have {BakingSodaNum} Baking soda")
-                elif shop_selection == "get toppings":
-                    ToppingsNum += 1
-                    Money -= 12
-                    print(f"you have ${Money}")
-                    print(f"you have {ToppingsNum} Baking soda")
-                else:
-                    print("you can't type this")
-                    shop_selection = str(input(""))
+            if shop_selection == "get egg":
+                EggNum += 1
+                Money -= 12
+                print(f"you have ${Money}")
+                print(f"you have {EggNum} eggs")
+            elif shop_selection == "get sugar":
+                SugarNum += 1
+                Money -= 12
+                print(f"you have ${Money}")
+                print(f"you have {SugarNum} sugar")
+            elif shop_selection == "get baking soda":
+                BakingSodaNum += 1
+                Money -= 12
+                print(f"you have ${Money}")
+                print(f"you have {BakingSodaNum} Baking soda")
+            elif shop_selection == "get toppings":
+                ToppingsNum += 1
+                Money -= 12
+                print(f"you have ${Money}")
+                print(f"you have {ToppingsNum} Baking soda")
+            else:
+                print("you can't type this")
+                shop_selection = str(input(""))
     elif Shopping_loop_trigger == "no":
         if ToppingsNum < 2 and BakingSodaNum < 2 and SugarNum < 2 and EggNum < 2:
             print("you still have to shop")
             shop_selection = str(input(""))
-            while shop_selection != "get egg" or "get sugar" or "get baking soda" or "get toppings":
+            while shop_selection not in valid_values:
                 if shop_selection == "get egg":
                     EggNum += 1
                     Money -= 12
@@ -145,7 +142,8 @@ while continue_game:
                 time.sleep(1)
                 print("you can bake now")
                 Bake_item = str(input(""))
-                while Bake_item != "bake cookie" or "bake small dounut" or "bake small muffin":
+                valid_bake_items = ["bake cookie", "bake small dounut", "bake small muffin"]
+                while Bake_item  not in valid_bake_items:
                     if Bake_item == "bake cookie":
                         ToppingsNum -= 1
                         BakingSodaNum -= 1
@@ -178,7 +176,8 @@ while continue_game:
                 time.sleep(1)
                 print("you can bake now")
                 Bake_item = str(input(""))
-                while Bake_item != "bake 5 cookies" or "bake large dounut" or "bake large muffin":
+                valid_large_bake_items = ["bake 5 cookies", "bake large dounut", "bake large muffin"]
+                while Bake_item  not in valid_large_bake_items:
                     if Bake_item == "bake 5 cookies":
                         ToppingsNum -= 1
                         BakingSodaNum -= 1
