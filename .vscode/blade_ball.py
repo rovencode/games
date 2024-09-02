@@ -108,6 +108,7 @@ def update():
         p2.enable()
         p3.enable()
         p4.enable()
+
     if ball_dir == p2 and abs(enemy.x-p2.x) < 2 and abs(enemy.z-p2.z) < 2:
         death_chance = randint (1, 6)
         if death_chance == 1:
