@@ -23,20 +23,20 @@ pickaxe = Button(
     position = (-0.8, -0.4, 0),
     texture = 'download__26_-removebg-preview'
 )
-
+birch_block_normal = 0
 class Tree(Entity):
     def __init__(self, position = (0, 0, 0,)):
         tree_height = randint(5,10)
         tree_width = tree_height / 10
         tree_type = randint(1,2)
         if tree_type == 1:
-                self.tree_color = color.brown
+                self.tree_color = 'download (23)'
         elif tree_type == 2:
-                self.tree_color = color.white
+                self.tree_color = 'download (24)'
         super().__init__(
             model = 'cube',
-            color = self.tree_color,
             scale = (1, randint(7,10), 1),
+            texture = self.tree_color,
             position = position,
             collider = 'box'
         )
@@ -49,24 +49,27 @@ class Tree(Entity):
         )
     def mine_wood(self):
         global wood_plank_normal
+        global birch_block_normal
         global tree_color
         if self.hovered and mouse.left and pickaxe_ == True:
             destroy(self)
-            if self.tree_color == color.brown:
+            if self.tree_color == 'download (23)':
                 wood_ore.enable()
                 wood_plank_normal = 1
-            elif self.tree_color == color.white:
+            elif self.tree_color == 'download (24)':
                 birch_ore.enable()
-
+                birch_block_normal = 1
+cobble_block = 0
 class Mountain(Entity):
     def __init__(self, position=(0, 0, 0)):
         super().__init__(
             model='sphere',
-            color=color.gray,
+            color = color.gray,
             scale=(25, 100, 25),
+            texture_scale = (1, 1),
             position=position,
         )
-
+cobble_block = 0
 class Ore(Entity):
     def __init__(self, position=(0, 0, 0)):
         super().__init__(
@@ -77,11 +80,12 @@ class Ore(Entity):
             collider = 'box'
         )
     def mine(self):
+        global cobble_block
         global ores_
         if self.hovered and mouse.left and pickaxe_ == True:
+            cobble_block = 1
             cobble_ore.enable()
             destroy(self)
-
 class House(Entity):
     def __init__(self, position=(0, 0, 0)):
         super().__init__(
@@ -111,7 +115,6 @@ class House(Entity):
             scale = (0.2, 0.2, 0.1),
             position = (0, 0.1, 0.5)
         )
-
 class inventory(Button):
      def __init__(self, position=(0, 0, 0)):
         super().__init__(
@@ -156,11 +159,31 @@ class wood_block(Entity):
             color = color.brown,
             scale = (1, 1, 1),
             position = position,
-            collider = 'box'
+            collider = 'box',
+            texture = 'download (23)'
+        )
+class birch_block__(Entity):
+    def __init__(self, position = (0, 0, 0)):
+        super().__init__(
+            model = 'cube',
+            scale = (1, 1, 1),
+            position = position,
+            collider = 'box',
+            texture = 'download (24)'
+        )
+class cobble_block__(Entity):
+    def __init__(self, position = (0, 0, 0)):
+        super().__init__(
+            model = 'cube',
+            scale = (1, 1, 1),
+            position = position,
+            collider = 'box',
+            texture = 'download (25)'
         )
 
 Ores = []
 trees = []
+
 for i in range(1050):
     trees.append(Tree(position = (randint(-1000, 1000), 0, randint(-1000, 1000))))
 for i in range(50):
@@ -176,6 +199,9 @@ print(inventory_block_positions)
 wood_plank_normal = 0
 pickaxe_ = False
 def update():
+    global enemy_num
+    global birch_block_normal
+    global cobble_block
     global wood_plank_normal
     global pickaxe_
     global ores_
@@ -198,7 +224,6 @@ def update():
 
     if held_keys['5']:
         wood__ = True
-        print("hi")
     if held_keys['6']:
         wood__ = False
 
@@ -215,8 +240,11 @@ def update():
     mouse_position = mouse.world_point
     if mouse.right and wood__ == True and wood_plank_normal == 1:
         wood_block(position = (mouse_position.x, mouse_position.y, mouse_position.z))
-
-
+    if mouse.right and birch__ == True and birch_block_normal == 1:
+        birch_block__(position = (mouse_position.x, mouse_position.y, mouse_position.z))
+    if mouse.right and cobble__ == True and cobble_block == 1:
+        cobble_block__(position = (mouse_position.x, mouse_position.y, mouse_position.z))
+    
 player = FirstPersonController(velocity = (0, 0, 0), speed = 12)
         
 game.run()

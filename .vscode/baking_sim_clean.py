@@ -81,10 +81,4 @@ def main():
         budget = buy(item, budget, inventory)
 
 # run the program
-main()
-
-
-
-        
-
-        
+main() 

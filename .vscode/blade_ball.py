@@ -110,19 +110,19 @@ def update():
         p4.enable()
 
     if ball_dir == p2 and abs(enemy.x-p2.x) < 2 and abs(enemy.z-p2.z) < 2:
-        death_chance = randint (1, 6)
+        death_chance = randint (1, 20)
         if death_chance == 1:
             p2.disable()
         else:
             pass
     if ball_dir == p3 and abs(enemy.x-p3.x) < 2 and abs(enemy.z-p3.z) < 2:
-        death_chance = randint (1, 6)
+        death_chance = randint (1, 20)
         if death_chance == 1:
             p3.disable()
         else:
             pass
     if ball_dir == p4 and abs(enemy.x-p4.x) < 2 and abs(enemy.z-p4.z) < 2:
-        death_chance = randint (1, 6)
+        death_chance = randint (1, 20)
         if death_chance == 1:
             p4.disable()
         else:
